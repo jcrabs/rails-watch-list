@@ -7,8 +7,4 @@
   <% end %>
 </ul>
 <p><strong>Create a new bookmark</strong></p>
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.association :movie %>
-  <%= f.input :comment %>
-  <%= f.submit "Create!", class: "btn btn-light" %>
-<% end %>
+<%= render "bookmark_form", list: @list, bookmark: @bookmark %>
