@@ -1,5 +1,4 @@
 <h1><%= @list.name %></h1>
-<%= link_to "Create new bookmark", new_list_bookmark_path(@list), class: "btn btn-light" %>
 <ul>
   <% @bookmarks.each do |bookmark| %>
     <li><%= bookmark.movie.title %>
@@ -7,3 +6,9 @@
     </li>
   <% end %>
 </ul>
+<p><strong>Create a new bookmark</strong></p>
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.association :movie %>
+  <%= f.input :comment %>
+  <%= f.submit "Create!", class: "btn btn-light" %>
+<% end %>
