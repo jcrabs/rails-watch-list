@@ -10,10 +10,11 @@
 require "json"
 require "open-uri"
 
-puts "cleaning database..."
+puts "Cleaning database..."
 Movie.destroy_all
+List.destroy_all
 
-puts "creating movies..."
+puts "Creating movies..."
 
 url = "https://tmdb.lewagon.com/movie/top_rated"
 movies_serialized = URI.open(url).read
@@ -28,3 +29,11 @@ movies.each do |movie|
 end
 
 puts "Created #{Movie.all.length} movies."
+
+puts "Creating lists..."
+
+List.create!(name: "Top 5")
+List.create!(name: "Drama")
+List.create!(name: "Favorites")
+
+puts "Created #{List.all.length} lists."
