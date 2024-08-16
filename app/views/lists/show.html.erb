@@ -1,19 +1,37 @@
+<div class="banner">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
 <div class="container">
-  <h1><%= @list.name %></h1>
   <p>
     <%= link_to list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Delete #{@list.name}?"}, class:"text-black" do %>
         Delete this list <i class="fa-solid fa-trash-can"></i>
     <% end %>
   </p>
-  <ul>
+
+  <div class="movie-grid">
     <% @bookmarks.each do |bookmark| %>
-      <li><%= bookmark.movie.title %>
-          <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Delete #{bookmark.movie.title}?"} do %>
-            <i class="fa-solid fa-trash-can"></i>
-          <% end %>
-      </li>
+      <div class="card-movie">
+        <img src="<%= bookmark.movie.poster_url %>"/>
+        <div class="card-movie-infos">
+          <div>
+            <h2><%= bookmark.movie.title %></h2>
+            <p><%= bookmark.movie.overview %></p>
+          </div>
+          <h2 class="card-movie-rating"><%= bookmark.movie.rating %></h2>
+        </div>
+        <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Delete #{bookmark.movie.title}?"},
+            class: "card-movie-delete" do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      </div>
     <% end %>
-  </ul>
-  <p><strong>Create a new bookmark</strong></p>
+  </div>
+
+<hr>
+
+<p><strong>Create a new bookmark</strong></p>
   <%= render "lists/bookmark_form", list: @list, bookmark: @bookmark %>
 </div>
